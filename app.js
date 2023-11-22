@@ -27,12 +27,12 @@ app.use(logger('dev'));
 app.use(log.log);
 app.use(log.auth);
 
-app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 // mongoose.connect("mongodb://localhost:27017/react_express", { useNewUrlParser: true });
 
 mongoose.connect(db, {
@@ -46,10 +46,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/custom',customRouter);
 app.use('/todos',todosRouter);
-// app.use('/movies',auth.verifyUserToken,moviesRouter);
-app.use('/movies',moviesRouter)
-// app.use('/reviews',auth.verifyUserToken,reviewsRouter);
-app.use('/reviews',reviewsRouter)
+app.use('/movies',auth.verifyUserToken,moviesRouter);
+// app.use('/movies',moviesRouter)
+app.use('/reviews',auth.verifyUserToken,reviewsRouter);
+// app.use('/reviews',reviewsRouter)
 
 
 // catch 404 and forward to error handler
